@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+// tag::dependencies[]
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+	testCompile "junit:junit:4.12"
+	compile group: 'com.google.guava',name: 'guava',version: '14.0'
+}
+
+// end::dependencies[]
+
+// tag::repositories[]
+repositories {
+	mavenCentral()
+}
+// end::repositories[]
+
+// tag::jar[]
+jar {
+	manifest {
+		attributes 'Main-Class': 'main.java.hello.HelloMain'
+		}
+}
+// end::jar[]
+
+// tag::wrapper[]
+// end::wrapper[]
