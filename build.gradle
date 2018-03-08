@@ -20,7 +20,7 @@ repositories {
 // tag::jar[]
 jar {
 	manifest {
-		attributes 'Main-Class': 'main.java.hello.HelloMain'
+		attributes 'Main-Class': 'hello.HelloMaind'
 		}
 }
 // end::jar[]

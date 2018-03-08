@@ -1,4 +1,4 @@
-package main.java.hello;
+package hello;
 
 class Person {
 

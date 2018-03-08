@@ -1,4 +1,4 @@
-package main.java.hello;
+package hello;
 import java.util.*;
 public class HelloMain {
     public static void main(String args[]){

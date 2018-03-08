@@ -1,4 +1,4 @@
-package main.java.hello;
+package hello;
 import java.util.Random;
 public class GeneratePerson{
 
