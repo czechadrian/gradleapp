@@ -1,25 +1,39 @@
 package hello;
 
+import java.util.regex.*;
+
 class Person {
 
-    private String name;
-    private String surname;
-    private String email;
+    public String name;
+    public String surname;
+    public String email;
 
-    Person(String name,String surname,String email){
-        this.name=name;
-        this.surname=surname;
-        this.email=email;
+    public Person(String name, String surname, String email) {
+       this.name = name;
+       this.surname = surname;
+       this.email = email;
+       this.PersonThreads();
     }
-    public String toString(){
-        if(name.matches("^[a-zA-Z]+$")
-                ||surname.matches("^[a-zA-Z]+$")
-                ||email.matches("^[^@]+@[a-z]+\\.[a-z]{3}$"))
-            return "name: " + name + " surname: " + surname
-                    + " email: " + email;
-        else
-            return "error with data,try again";
 
+    private void PersonThreads() throws IllegalArgumentException{
+        Pattern pNameAndSurname = Pattern.compile("^[-a-zA-ZęĘóÓĄąŚśłŁżŻźŹćĆńŃ]+$");
+        Pattern pDomain = Pattern.compile("[-a-zA-ZęĘóÓĄąŚśłŁżŻźŹćĆńŃ]+@[a-z]+\\.[a-z]{2,3}$");
+
+        if(!this.name.matches(pNameAndSurname.toString()))
+            throw new IllegalArgumentException("invalid person's name");
+        if(!this.surname.matches(pNameAndSurname.toString()))
+            throw new IllegalArgumentException("invalid person's surname");
+        if(!this.email.matches(pDomain.toString()))
+            throw new IllegalArgumentException("invalid person's email");
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 
 }

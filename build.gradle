@@ -1,6 +1,5 @@
 apply plugin: 'java'
 
-// tag::dependencies[]
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -9,21 +8,12 @@ dependencies {
 	compile group: 'com.google.guava',name: 'guava',version: '14.0'
 }
 
-// end::dependencies[]
-
-// tag::repositories[]
 repositories {
 	mavenCentral()
 }
-// end::repositories[]
 
-// tag::jar[]
 jar {
 	manifest {
-		attributes 'Main-Class': 'hello.HelloMaind'
+		attributes 'Main-Class': 'hello.HelloMain'
 		}
 }
-// end::jar[]
-
-// tag::wrapper[]
-// end::wrapper[]

@@ -1,51 +1,51 @@
 package hello;
+
+import com.google.common.collect.ImmutableList;
+
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
 public class GeneratePerson{
 
-    String names[] = {"Achacja", "Achacjusz", "Achacy","Achilles", "Ada", "Adalbert",
-            "Adalberta", "Adalgunda", "Adalruna", "Alruna", "Adalryk", "Alderyk",
-            "Adalwin", "Adalwina", "Adam", "Adamina", "Adamnan", "Adaukt", "Addar",
-            "Adela", "Adelajda", "Adelard", "Adelina","Adelinda","Ademar" ,"Adolf",
-            "Macedoniusz","Machabeusz","Maciej","Macieja","Magdalena","Magnus"
-            ,"Maja","Majnard","Majol","Majola","Makaria","Makary","Makrobiusz"
-            ,"Makryn","Makryna","Maksencja","Maksencjusz", "Maksanty","Maksym"
-            ,"Maksyma","Maksymian","Maksymilian","Maksymiliana","Maksymin"
-            ,"Maksymina","Malachiasz","Malchus","Malina","Malkolm","Malwina"
-            ,"Małgorzata","Małobąd","Małogost","Małomir","Objęsław", "Ocięsław",
-            "Oda", "Odeta" , "Odo" , "Odon" , "Odoryk", "Odylon" , "Odyseusz", "Odys" ,
-            "Ofelia" , "Okrzesław" , "Oktawia", "Oktawian" , "Oktawiusz" , "Olaf" ,
-            "Oldmir" , "Olga" , "Olgierd" , "Olimpia" , "Olimpiusz" , "Oliwer" ,
-            "Oliwia" , "Oliwier" , "Oliwiusz"};
-    String surnames[] = {"Gabrowski" , "Gadowski", "Gajda" , "Galewicz" , "Galiński" ,
-            "Gałczyński" , "Gałecki" , "Gancarczyk" , "Garbowski" , "Gardocki" ,
-            "Gawkowski" , "Gawlik" , "Gawłowski","Damboń" , "Dancewicz" , "Danielak" ,
-            "Danysz" , "Dąbek" , "Dąbkowski" , "Dąbrowski" , "Dębicki" , "Dębiński" ,
-            "Dłuski" , "Dobiecki" , "Dobrucki" , "Dobrzański" , "Dobrzyński" ,
-            "Doliński" , "Dołęga-Zakrzewski" , "Domachowski" , "Domagalski" ,
-            "Drągowski" , "Drewniowski" , "Drewnowicz" , "Drewnowski" , "Drobczyński" ,
-            "Drzewiecki" , "Duchnowski" , "Dunajewski" , "Dutkiewicz" , "Dziadosz",
-            "Niemojowski" , "Niewiadomski" , "Niewiarowscy" , "Nowacki" , "Nowak" ,
-            "Nowakowski" , "Nowicka" , "Nowicki" , "Nowiński","    Oborski" ,
-            "Obrębscy" , "Ochab" , "Ochocki" , "Odrzywolski" , "Okulski",
-            "Olechnowicz" , "Olechowski" , "Olejniczak" , "Olekszyk" , "Olszewski",
-            "Rogalski" , "Roguski" , "Romanowicz" , "Romański" , "Roszkowski" ,
-            "Różański" , "Różewicz" , "Różycki" , "Rubinowicz" , "Rudnicki"};
+    public List<Person> people = new ArrayList<>();
 
-    String domain[] = {"gmail.com","onet.pl","interia.pl","yyoyo.qwe"};
+    private List<String> names = new ArrayList<>();
 
-    Random rand = new Random();
-    String name;
-    String surname;
-    public String generateName(){
-        name = names[rand.nextInt(names.length)];
-        return name + " ";
+    private List<String> surnames = new ArrayList<>();
+
+    private List<String> domain = new ArrayList<>();
+
+    public GeneratePerson(List<String> names,List<String> surnames, List<String> domain) {
+        this.names = names;
+        this.surnames = surnames;
+        this.domain = domain;
     }
-    public String generateSurnames(){
-       surname =surnames[rand.nextInt(surnames.length)];
-        return surname + " ";
-    }
-    public String generateEmails(){
 
-        return name + surname +"@" +domain[rand.nextInt(domain.length)];
+    private Random rand = new Random();
+    private String name;
+    private String surname;
+    private String email;
+
+    public void getRandomPerson() {
+        name = names.get(rand.nextInt(names.size()));
+        surname = surnames.get(rand.nextInt(surnames.size()));
+        email = name + surname + domain.get(rand.nextInt(domain.size()));
+
+        people.add(new Person(name,surname, email));
+    }
+
+    public void sortPeople() {
+
+    Comparator<Person> byNames = Comparator.comparing(person -> person.name);
+    Comparator<Person> bySurnames = Comparator.comparing(person -> person.surname);
+    Comparator<Person> byEmail = Comparator.comparing(person -> person.email);
+
+    people = people.stream().sorted(byNames.thenComparing(bySurnames).thenComparing(byEmail))
+            .collect(Collectors.toList());
+
+
     }
 }
